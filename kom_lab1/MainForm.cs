@@ -12,6 +12,7 @@ namespace kom_lab1
         private Stack<string> undoStack = new Stack<string>();
         private Stack<string> redoStack = new Stack<string>();
         private bool isUndoRedoOperation = false;
+        private Analyzer analyzer = new Analyzer();
 
         public Compiler()
         {
@@ -60,7 +61,7 @@ namespace kom_lab1
 
         private void пускToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            RunAnalyzer();
         }
 
         private void справкаToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -280,7 +281,7 @@ namespace kom_lab1
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
-
+            RunAnalyzer();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -308,6 +309,18 @@ namespace kom_lab1
             MarkTextChanged();
         }
 
+        private void RunAnalyzer()
+        {
+            string inputText = InputRichTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(inputText))
+            {
+                analyzer.Analyze(inputText, OutputRichTextBox);
+            }
+            else
+            {
+                MessageBox.Show("Введите текст для анализа.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         private void OutputRichTextBox_TextChanged(object sender, EventArgs e)
         {
 
